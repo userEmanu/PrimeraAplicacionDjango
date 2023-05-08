@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+{% block menu %}
+    {% include "menu.html" %}
+{% endblock %}
+{% block contenido %}
+    <div class="w-50 mt-3" style="margin: 0 auto;">
+        <form action="/agregarCategoria/" method="post">
+            {% csrf_token %}
+            <div>
+                <h3 class="text-center">AGREGAR CATEGORIA</h3>
+            </div>
+            <div class="form-floating">
+                <input type="text" name="txtNombre" id="txtNombre" class="form-control" required>
+                <label for="txtNombre">Nombre categoria: </label>
+            </div>
+            <div>
+                <button class="btn btn-success mt.3">Agregar</button>
+            </div>
+        </form>
+        <div>
+            {% if mensaje %}
+                {% if estado %}
+                    <script>
+                        Swal.fire('Agregar Categoria','{{mensaje}}','error')
+                    </script>
+                {% else %}
+                    <script>
+                        Swal.fire('Agregar Categoria','{{mensaje}}','success')
+                    </script>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block piePagina %}
+    {% include "piePagina.html" %}
+{% endblock %}

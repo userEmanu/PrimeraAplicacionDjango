@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle Pokemon</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body onload="loadUrlPokemon()">
+    <div class="fondo">
+        <div class="cotainer-fluid d-flex justify-content-center">
+            <div class="row">
+                <div class="col-6" id="pokemon">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function loadUrlPokemon() {
+        let urlPokemon = localStorage.urlPokemon
+
+        fetch(urlPokemon)
+            .then((response) => response.json())
+            .then(data => {
+                console.log(data)
+
+                let altura = data.height * 0.1
+                let peso = data.weight * 0.1
+
+                document.getElementById("pokemon").innerHTML =
+                    `<div class="card mb-3 fondoCard" style="width:350px ">
+                    <img src="${data.sprites.other["official-artwork"].front_default}" id="" class="card-img-top" alt="...">
+                    <div class="card-body fondoCard">     
+                      <h5 class="card-title">${data.name}</h5>
+                      <p class="card-text">Altura: ${altura.toFixed(1)} Mts</p>
+                      <p class="card-text">Peso: ${peso.toFixed(1)} Kg</p>
+                      <p class="card-text">id: ${data.id}</p>
+                      <p class="card-text">Experiencia Base: ${data.base_experience}</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>`
+
+            })
+    }
+</script>

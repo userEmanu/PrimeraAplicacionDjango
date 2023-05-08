@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+{% block menu %}
+    {% include "menu.html" %}
+{% endblock %}
+{% block contenido %}
+    <div class="w-50 mt-3" style="margin: 0 auto;">
+        <form>
+            <div>
+                <table class="table table-bordered" style="margin: 0 auto;">
+                    <thead class="bg-dark text-white text-center">   
+                        <tr>
+                            <td>Nombre</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in listaCategorias %}
+                            <tr>
+                                <td>{{c.catNombre}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+{% endblock %}
+{% block piePagina %}
+    {% include "piePagina.html" %}
+{% endblock %}

@@ -1,0 +1,42 @@
+header{
+    width: 100%;
+    height: 130px;
+    border-radius: 30px;
+    background-image: url(../img/fondo.PNG);
+    background-color: #fffeff;
+    background-repeat: no-repeat;
+}
+.titulo{
+    position: absolute;
+    font-family: tahoma;
+    color: rgb(230, 175, 58);
+    font-size: 60px;
+    font-weight: bold;
+    text-shadow: 0.1em 0.1em 0.1em rgba(99, 99, 99, 0.247) ;
+    top: 5%;
+    left: 39%;
+}
+nav{
+    float: left;
+    width: 20%;
+    height: 450px;
+    border-radius: 5px;
+}
+
+section{
+    background-color: rgb(255, 255, 255);
+    padding-left: 10px;
+    float: left;
+    width: 80%;
+    min-height: 400px;
+    border-radius: 30px;
+    box-shadow: 0.3em 0.3em 0.3em rgba(0,0,0,0.3);
+
+}
+
+footer{
+    width: 100%;
+    height: 100px;
+    border-radius: 5px;
+}
+

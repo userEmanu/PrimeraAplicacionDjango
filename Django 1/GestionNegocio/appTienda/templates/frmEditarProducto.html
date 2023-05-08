@@ -1,0 +1,74 @@
+{% extends "index.html" %}
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+{% block menu %}
+    {% include "menu.html" %}
+{% endblock %}
+{% block contenido %}
+    <div class="w-50 mt-3" style="margin: 0 auto;">
+        <form action="/actualizarProducto/" method="post">
+             {% csrf_token %}
+            <div>
+                <h3 class="text-center">AGREGAR PRODUCTO</h3>
+            </div>
+            <div class="form-floating">
+                <input type="number" name="txtCodigo" id="txtCodigo" class="form-control" value="{{producto.proCodigo}}" required>
+                <label for="txtCodigo">Codigo Productor: </label>
+            </div>
+            <div class="form-floating">
+                <input type="text" name="txtNombre" id="txtNombre" class="form-control" value="{{producto.proNombre}}" required>
+                <label for="txtNombre">Nombre Productor: </label>
+            </div>
+            <div class="form-floating">
+                <input type="number" name="txtPrecio" id="txtPrecio" class="form-control" value="{{producto.proPrecio}}" required>
+                <label for="txtPrecio">Precio Productor: </label>
+            </div>
+            <div class="form-floating">
+                <select class="form-select" name="cbCategoria" id="cbCategoria" value="{{producto.proCategoria}}" required>
+                    <option value="0">Seleccione</option>
+                    {% for l in listaCategorias %}
+                        {% if l.id == producto.proCategoria.id %}
+                            <option value="{{l.id}}" selected>{{l.catNombre}}</option>
+                        {%else%}
+                            <option value="{{l.id}}">{{l.catNombre}}</option>
+                        {% endif %}                
+                    {% endfor %}
+                </select>
+                <label for="cbCategoria">Categoria: </label>
+                
+            </div>
+            <div class="form-group">
+                <input type="file" name="fileFoto" id="fileFoto" placeholder="imagen del producto"
+                class="form-control" accept=".jpg">
+                <label for="fileFoto">Cargar Foto, solo si la desea cambiar</label>
+            </div>
+            <div class="text-center">
+                <img id="imagenProducto" class="../media/{{p.proFoto}.jpg}" altt="" width="100" height="100">
+            </div>
+            <br>
+            <div>
+                <div class="text-center">
+                    <a href=""><button hr class="btn btn-success">Actualizar</button></a>
+                    <a href="/listarProductos/"><button hr class="btn btn-danger">Cancelar</button></a>
+                </div>
+            <input type="hidden" name="idProducto" id="idProducto" class="form-control" value="{{producto.id}}" required>
+        </form>
+        <div>
+            {% if mensaje %}
+                {% if estado %}
+                    <script>
+                        Swal.fire('Agregar Producto','{{mensaje}}','success')
+                    </script>
+                {% else %}
+                    <script>
+                        Swal.fire('Agregar Producto','{{mensaje}}','error')
+                    </script>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block piePagina %}
+    {% include "piePagina.html" %}
+{% endblock %}

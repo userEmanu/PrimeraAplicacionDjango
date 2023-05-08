@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+{% block menu %}
+    {% include "menu.html" %}
+{% endblock %}
+{% block contenido %}
+    <div class="w-50 mt-3" style="margin: 0 auto;">
+        <form action="/actualizarProducto" method="post">
+            <div>
+                <h3 class="text-center">AGREGAR PRODUCTO</h3>
+            </div>
+            <div class="form-floating">
+                <input type="number" name="txtCodigo" id="txtCodigo" class="form-control" value="{{producto.proCodigo}}" required>
+                <label for="txtCodigo">Codigo Productor: </label>
+            </div>
+            <div class="form-floating">
+                <input type="text" name="txtNombre" id="txtNombre" class="form-control" value="{{producto.proNombre}}" required>
+                <label for="txtNombre">Nombre Productor: </label>
+            </div>
+            <div class="form-floating">
+                <input type="number" name="txtPrecio" id="txtPrecio" class="form-control" value="{{producto.proPrecio}}" required>
+                <label for="txtPrecio">Precio Productor: </label>
+            </div>
+            <div class="form-floating">
+                <select class="form-select" name="cbCategoria" id="cbCategoria" value="{{producto.proCategoria}}" required>
+                    <option value="0">Seleccione</option>
+                    {% for l in listaCategorias %}
+                        {% if l.idCategoria==producto.proCategoria %}
+                            <option value="{{l.idCategoria}}" selected>{{l.catNombre}}</option>
+                        {%else%}
+                            <option value="{{l.idCategoria}}">{{l.idCategoria}}</option>
+                        {% endif %}                
+                    {% endfor %}
+                </select>
+                <label for="cbCategoria">Categoria Producto: </label>
+                
+            </div>
+            <div>
+                <div>
+                    <button class="btn btn-success mt-3">Editar</button></a>
+                    <a href="/listaProductos"><button class="btn btn-warning mt-3">Cancelar</button></a>
+                </div>
+            <input type="hidden" name="idProducto" id="idProducto" class="form-control" value="{{producto.idProducto}}" required>
+        </form>
+        <div>
+            {% if mensaje %}
+                {% if estado %}
+                    <script>
+                        Swal.fire('Agregar Producto','{{mensaje}}','success')
+                    </script>
+                {% else %}
+                    <script>
+                        Swal.fire('Agregar Producto','{{mensaje}}','error')
+                    </script>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block piePagina %}
+    {% include "piePagina.html" %}
+{% endblock %}

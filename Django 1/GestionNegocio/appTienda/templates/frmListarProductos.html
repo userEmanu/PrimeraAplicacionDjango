@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+{% block menu %}
+    {% include "menu.html" %}
+{% endblock %}
+{% block contenido %}
+    <br>
+    <div>
+        <a href="/vistaProducto/"><button hr style="margin-left: 325px;" class="btn btn-warning">Agregar</button></a>
+    </div>
+    <div class="w-50 mt-3" style="margin: 0 auto;">
+        <form>
+            <div>
+                <table class="table table-bordered" style="margin: 0 auto;">
+                    <thead class="bg-dark text-white text-center">   
+                        <tr>
+                            <td>Codigo</td>
+                            <td>Nombre</td>
+                            <td>Precio</td>
+                            <td>Categoria</td>
+                            <td>Foto</td>
+                            <td>Accion</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in listaProductos %}
+                        <tr>
+                            <td>{{p.proCodigo}}</td>
+                            <td>{{p.proNombre}}</td>
+                            <td>{{p.proPrecio}}</td>
+                            <td>{{p.proCategoria.catNombre}}</td>
+                            <td class="text-center"><img src="../media/{{p.proFoto}}" width="50"
+                                height="50" alt=""></td>
+                            <td class="text-center">
+                                <a href="/consultarProducto/{{p.id}}"><i class="fa fa-edit text-warning"></i></a>
+                                <i class="fa fa-trash text-danger" onclick="abrirModalEliminar('{{p.id}}')"></i>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+
+    <div>
+        {% if mensaje %}
+            <script>
+                swal.fire("Gestion Productos",'{{mensaje}}',"infor")
+            </script>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block piePagina %}
+    {% include "piePagina.html" %}
+{% endblock %}

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width= initial-scale=1.0" />
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body onload="slideType(),getAllPokemon()">
+  <div class="container-fluid">
+    <div class="row busqueda justify-content-end">
+      <div class="col-5 bg-primary felx-column align-content-center">
+        <input class="form-control" type="text" name="txtBuscar" id="txtBuscar" onkeyup="autoCompletePokemon()">
+        <div class="col-12" id="lista"></div>
+      </div>
+      <div class="col-1 bg-danger d-flex align-items-center">
+        <button class="btn btn-primary">Buscar</button>
+      </div>
+    </div>
+
+    <div class="row" style="height: 100px">
+      <div class="col-12 bg-warning"></div>
+    </div>
+
+    <div class="row" style="height: 300px">
+      <div class="col-8 bg-info fondoCarrusel">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+              aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+              aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+              aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://www.pngall.com/wp-content/uploads/2016/06/Pokemon-High-Quality-PNG.png" class="d-block"
+                style="width: 15%;" alt="..." />
+              <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="https://www.pngplay.com/wp-content/uploads/10/Pokemon-Transparent-Image.png" class="d-block"
+                style="width: 23%;" alt="..." />
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Second slide label</h5>
+                <p>Some representative placeholder content for the second slide.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="https://www.megaidea.net/wp-content/uploads/2021/08/Pokemon02-956x1024.png" class="d-block"
+                style="width: 22%;" alt="..." />
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Third slide label</h5>
+                <p>Some representative placeholder content for the third slide.</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-4 bg-success"></div>
+    </div>
+
+    <div class="row" style="height: 200px">
+      <div class="col-12 bg-danger">
+        <div class="container my-3 mt-5" id="featureContainer">
+          <div>
+            <div class="row mx-auto my-auto justify-content-center">
+              <div id="featureCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="d-flex justify-content-between position-relative top-50 z-1 px-3">
+                  <a class="indicator" href="#featureCarousel" role="button" data-bs-slide="prev">
+                    <span class="fas fa-chevron-left" aria-hidden="true"></span>
+                  </a>
+                  &nbsp;&nbsp;
+                  <a class="w-aut indicator" href="#featureCarousel" role="button" data-bs-slide="next">
+                    <span class="fas fa-chevron-right" aria-hidden="true"></span>
+                  </a>
+                </div>
+                <div class="carousel-inner" role="listbox" id="carouselType">
+                  <!-- aqui van todas las categorias de los pokemons -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="height: 300px">
+        <div class="col-12 bg-primary"></div>
+      </div>
+
+      <div class="row justify-content-between" style="height: 200px">
+        <div class="col-5 bg-info"></div>
+        <div class="col-5 bg-danger"></div>
+      </div>
+
+      <div class="row bg-dark align-content-center" style="height: 300px">
+        <div class="col-4 d-flex justify-content-center">
+          <div class="card" style="width: 18rem">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 d-flex justify-content-center">
+          <div class="card" style="width: 18rem">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 d-flex justify-content-center">
+          <div class="card" style="width: 18rem">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make upthe bulk of the card's
+                content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 my-2">
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+        aria-controls="offcanvasRight">Toggle right offcanvas</button>
+      </div>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          ...
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+  function carousel() {
+    let myCarousel = document.querySelectorAll(
+      "#featureContainer .carousel .carousel-item"
+    );
+    myCarousel.forEach((el) => {
+      const minPerSlide = 4;
+      let next = el.nextElementSibling;
+      for (var i = 1; i < minPerSlide; i++) {
+        if (!next) {
+          // wrap carousel by using first child
+          next = myCarousel[0];
+        }
+        let cloneChild = next.cloneNode(true);
+        el.appendChild(cloneChild.children[0]);
+        next = next.nextElementSibling;
+      }
+    });
+  }
+</script>
+<script>
+  const categoriasPokemon = []
+  var allPokemon = []
+
+  function getTypePokemon() {
+    return new Promise((resolve) => {
+      fetch("https://pokeapi.co/api/v2/type")
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.results)
+          data.results.forEach(element => {
+            categoriasPokemon.push(element)
+          });
+          return resolve("Ok")
+        })//Termina el fech
+    })  //termina la promesa
+  }
+  function slideType() {
+    getTypePokemon()
+      .then(data => {
+        let slide = "";
+        categoriasPokemon.forEach((element, index) => {
+          if (index === 0) {
+            slide +=
+              `<div class="carousel-item active">
+                      <div class="col-md-2">
+                        <div class="card">
+                          <div class="card-img">
+                            <a href="tipos.html" onclick="urlTypeLocal('${element.url}')">
+                              <imgsrc="https://img.freepik.com/iconos-gratis/pokebola_318-626332.jpg?size=626&ext=jpg&uid=R56105567&ga=GA1.2.665425444.1678996816&semt=sph"class="img-flui>
+                            </a>
+                          </div>
+                          <div class="card-img-overlays">${element.name}</div>
+                        </div>
+                      </div>
+                    </div>`
+          } else {
+            slide +=
+              `<div class="carousel-item ">
+                      <div class="col-md-2">
+                        <div class="card">
+                          <div class="card-img">
+                            <a href="tipos.html" onclick="urlTypeLocal('${element.url}')">
+                              <img src="https://img.freepik.com/iconos-gratis/pokebola_318-626332.jpg?size=626&ext=jpg&uid=R56105567&ga=GA1.2.665425444.1678996816&semt=sph" class="img-fluid">
+                            </a>
+                          </div>
+                          <div class="card-img-overlays">${element.name}</div>
+                        </div>
+                      </div>
+                    </div>`
+          }
+
+        });
+
+        document.getElementById("carouselType").innerHTML = slide
+        carousel()
+      })
+  }
+
+  function urlTypeLocal(valor) {
+    console.log("URL")
+    localStorage.setItem("url", valor)
+    localStorage.url = valor
+
+    let url = localStorage.url
+
+    let urlType = localStorage.getItem("url")
+  }
+
+  function getAllPokemon() {
+
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
+      .then(response => response.json())
+      .then(data => {
+        allPokemon = Object.values(data.results)
+      })
+  }
+
+
+  function autoCompletePokemon() {
+
+    let textoBuscar = document.getElementById('txtBuscar').value
+    if (textoBuscar.length >= 3) {
+      const filtroPokemon = allPokemon.filter(filtrarPokemon)
+      let lista = `<ul class="list-group-item active" aria-current="true">`
+      filtroPokemon.forEach(element => {
+        iconoPokemon(element.url)
+        lista += `<li class="list-group-item active" aria-current="true"> 
+                    <a onclick = 'detallePokemon("${element.url}")' href='detallePokemon.html'>${element.name}</a>
+                    <img id="icono${element.name}">
+                  </li>`
+      })
+      lista += `</ul>`
+
+      document.getElementById('lista').innerHTML = lista
+    }
+  }
+
+  function filtrarPokemon(element) {
+    let textoBuscar = document.getElementById('txtBuscar').value
+    return element.name.includes(textoBuscar)
+  }
+
+  function detallePokemon(urlPokemon) {
+    localStorage.urlPokemon = urlPokemon
+
+  }
+
+  function iconoPokemon(urlPokemon) {
+    fetch(urlPokemon)
+      .then(response => response.json())
+      .then(data => {
+        let icono = data.sprites.versions["generation-viii"].icons.front_default
+        document.getElementById(`icono${data.name}`).src = `${icono}`
+      })
+  }
+</script>
