@@ -2,6 +2,11 @@
 
 El proyecto Django1, fue mi primera aplicacion, se trata de un crud, para ejecutarlo solo hace falta crear el entorno(python -m venv 'nombre'), despues se  ubica
 en la carpeta que este el archivo, requeriments.txt y hace le siguiente comando (pip install -r requeriments.txt). https://emanuel031.pythonanywhere.com/
+activate el localhost o xampp
+cd entorno/scripts/activate.bat
+cd GestionProductos
+py manage.py migrate
+py manage.py runserver
 -----------------------------------------------------------------------------------------------------------------------------------
 Para ejecutar el proyecto GestionProductos, instala Flask, flask_sqlalchemy, pymysql y ejecuta el archivo app.py e 
 --------------------------------------------------------------------------------------
